@@ -37,7 +37,11 @@ export const AddMoney = () => {
         <div className="py-4 text-left">Bank</div>
         <Select
           onSelect={(value) => {
-            setBank(value);
+            setRedirectUrl(
+              SUPPORTED_BANKS.find((x) => x.name === value)?.redirectUrl || ""
+            );
+
+            setBank(SUPPORTED_BANKS.find((x) => x.name === value)?.name || "");
           }}
           options={SUPPORTED_BANKS.map((x) => ({
             key: x.name,
@@ -46,8 +50,8 @@ export const AddMoney = () => {
         />
         <div className="flex justify-center pt-4">
           <Button
-            onClick={() => {
-              createOnRamp(amount, bank);
+            onClick={async () => {
+              await createOnRamp(amount * 100, bank);
             }}
           >
             Add Money

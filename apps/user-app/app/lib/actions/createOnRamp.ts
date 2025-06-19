@@ -4,9 +4,11 @@ import { getServerSession } from "next-auth";
 import db from "@repo/db/client";
 
 export async function createOnRamp(amount: number, provider: string) {
+  console.log("ASdasds");
   const sesssion = await getServerSession(authOptions);
-  const userId = sesssion.user.id;
-  console.log(sesssion);
+  const userId = sesssion?.user?.id;
+  const userIdNumber = Number(userId);
+  console.log("asdasd : " + userId);
 
   if (!userId) {
     return {
@@ -16,13 +18,12 @@ export async function createOnRamp(amount: number, provider: string) {
 
   await db.onRampTransaction.create({
     data: {
-      id: userId,
       status: "Processing",
       amount: amount,
       provider: provider,
       token: Math.random().toString(),
       startTime: new Date(),
-      user: sesssion.user.name,
+      userId: userIdNumber,
     },
   });
 
