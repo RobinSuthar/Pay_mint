@@ -67,6 +67,15 @@ export default async function P2pTransction(to: string, amountt: number) {
         where: { userId: Reciver.id },
         data: { amount: { increment: amountt } },
       });
+
+      await tx.p2pTransfer.create({
+        data: {
+          fromUserId: from,
+          toUserId: Number(to),
+          amount: amountt,
+          timestamp: new Date(),
+        },
+      });
       console.log("Successef");
       return {
         message: "Done Successfully",
