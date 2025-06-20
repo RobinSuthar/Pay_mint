@@ -26,6 +26,7 @@ export async function createOnRamp(amount: number, provider: string) {
       userId: userIdNumber,
     },
   });
+  console.log("done");
 
   return {
     message: "On Ramp Transactions added successfully!",

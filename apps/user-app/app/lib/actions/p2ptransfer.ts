@@ -70,9 +70,9 @@ export default async function P2pTransction(to: string, amountt: number) {
 
       await tx.p2pTransfer.create({
         data: {
-          fromUserId: from,
-          toUserId: Number(to),
-          amount: amountt,
+          fromUserId: Number(from.id),
+          toUserId: Reciver.id,
+          amount: Number(amountt),
           timestamp: new Date(),
         },
       });
