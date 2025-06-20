@@ -5,10 +5,11 @@ export const P2PTranscation = ({
 }: {
   transactions: {
     id: number;
-
     amount: number;
+
     timestamp: Date;
     fromUserId: number;
+
     toUserId: number;
   }[];
 }) => {
@@ -33,9 +34,7 @@ export const P2PTranscation = ({
             <div className="flex flex-col justify-center">
               + Rs {t.amount / 100}
             </div>
-            <div className="flex flex-col justify-center">
-              + Rs {t.toUserId}
-            </div>
+            <div className="flex flex-col justify-center">+ Rs {t.amount}</div>
           </div>
         ))}
       </div>
