@@ -41,12 +41,17 @@ export default async function P2pTransction(to: string, amountt: number) {
   // // }
   try {
     await prisma.$transaction(async (tx) => {
-      console.log(from.id);
+      await tx.$queryRaw`
+      SELECT * FROM "User"
+      WHERE "id" = ${Number(from)}
+      FOR UPDATE`;
+
       const fromBalance = await tx.balance.findUnique({
         where: {
           userId: Number(from.id),
         },
       });
+
       console.log("hhhhhh");
       if (!fromBalance || fromBalance.amount < amountt) {
         console.log("No Money");
